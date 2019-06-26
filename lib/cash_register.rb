@@ -1,3 +1,5 @@
+require 'pry'
+
 class CashRegister
 
     attr_accessor :total, :discount
@@ -7,10 +9,16 @@ class CashRegister
         @discount = discount
     end
 
-    def add_item(title,price,quantity = 0)
+    def add_item(title,price,qty = 1)
         original_total = @total
-        @total += price
+        @total += price * qty
         original_total
+    end
+
+    def apply_discount
+        discount_percent = ((100.0 - @discount.to_f) / 100.0)
+        @total *= discount_percent
+        # binding.pry
     end
 
 end
